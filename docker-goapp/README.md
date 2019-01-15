@@ -1,5 +1,4 @@
-
-### This example shows us to create docker image which ised first from as the image layer in the second one
+### This example shows us to create docker image which used first from as the image layer in the second one
 
 ##### Create docker image with the TAG *gowebapp*:
 ```bash
