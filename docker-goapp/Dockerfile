@@ -7,8 +7,6 @@ RUN cd /app && go build -o gowebapp
 FROM alpine 
 RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 WORKDIR /app
-#COPY --from=build-env /app/gowebapp /app
-#COPY --from=build-env /app/*.html /app/
 COPY --from=build-env ["/app/gowebapp", "/app/*.html", "/app/"]
 
 EXPOSE 8080
