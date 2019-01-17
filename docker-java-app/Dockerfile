@@ -1,5 +1,5 @@
 FROM java:8
-WORKDIR /app
-ADD spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar /app
+WORKDIR /app/backend
+COPY ["spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar", "logback.xml", "execJavaApp.sh", "/app/backend/"]
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/app/spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar"]
+ENTRYPOINT ["/app/backend/execJavaApp.sh"]
