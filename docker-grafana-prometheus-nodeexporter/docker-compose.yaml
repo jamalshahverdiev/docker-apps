@@ -44,7 +44,9 @@ services:
       - /var/lib/docker/:/var/lib/docker:ro
   grafana:
     container_name: grafana
-    image: grafana/grafana
+    labels:
+      NAME: "pgsql"
+    #    image: grafana/grafana
     user: "0"
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
@@ -59,4 +61,5 @@ services:
       - '3000:3000'
     links:
       - db
+    build: './grafana'
 
