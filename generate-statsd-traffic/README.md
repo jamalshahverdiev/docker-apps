@@ -1,6 +1,6 @@
 ##### To generate stats from inside of the docker we can use this image (Clone the repository and execute following steps): 
 ```bash
-$ git clone https://github.com/jamalshahverdiev/docker-apps.git . && cd generate-statsd-traffic
+$ git clone https://github.com/jamalshahverdiev/docker-apps.git . && rm -rf .git/ && cd generate-statsd-traffic
 ```
 
 ##### Clone source code files from an Author `https://github.com/aussiearef` of codes:
