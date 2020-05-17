@@ -24,4 +24,4 @@ then
     exit 111
 fi
 
-echo -e "$1\n$2\n" | dotnet ShoeHub.DataGenerator.dll
+echo -e "$1\n$2\n\n" | dotnet ShoeHub.DataGenerator.dll
