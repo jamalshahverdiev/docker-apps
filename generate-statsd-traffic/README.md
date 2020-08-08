@@ -5,7 +5,7 @@ $ git clone https://github.com/jamalshahverdiev/docker-apps.git . && rm -rf .git
 
 ##### Clone source code files from an Author `https://github.com/aussiearef` of codes:
 ```bash
-$ git clone https://github.com/aussiearef/ShoeHub.git /tmp/ShoeHub && unzip /tmp/ShoeHub/Releases/Ubuntu.zip && cp ubuntu/* .
+$ git clone https://github.com/aussiearef/ShoeHub.git /tmp/ShoeHub && unzip /tmp/ShoeHub/Releases/Ubuntu.zip && cp ubuntu/* . && rm -rf ubuntu/
 ```
 
 ##### Build image with the name `statsarg`:
