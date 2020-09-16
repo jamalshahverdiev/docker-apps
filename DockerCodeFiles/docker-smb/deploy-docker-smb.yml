@@ -1,0 +1,18 @@
+---
+-
+  hosts: "{{ envname }}"
+  gather_facts: true
+  tasks:
+    - 
+    - include: included/cloneOrPullAllSources.yml
+      tags:
+        - cloneAllRepositories
+      register: cloneAllRepositories
+
+    - include: included/beforeDockerComposeTasks.yml
+      tags:
+        - prepareDockerComposeTasksEnv
+      register: prepareDockerComposeTasksEnv
+#      when: cloneAllRepositories is success
+
+...

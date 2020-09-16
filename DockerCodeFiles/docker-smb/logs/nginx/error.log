@@ -1,0 +1,21 @@
+2019/10/25 13:43:24 [emerg] 1#1: host not found in upstream "php:9001" in /etc/nginx/conf.d/upstream.conf:1
+2019/10/25 13:44:15 [emerg] 1#1: host not found in upstream "php:9001" in /etc/nginx/conf.d/upstream.conf:1
+2019/10/25 13:44:27 [emerg] 1#1: host not found in upstream "php:9001" in /etc/nginx/conf.d/upstream.conf:1
+2019/10/25 13:45:00 [emerg] 1#1: host not found in upstream "php:9001" in /etc/nginx/conf.d/upstream.conf:1
+2019/10/25 13:45:47 [emerg] 1#1: host not found in upstream "php:9001" in /etc/nginx/conf.d/upstream.conf:1
+2019/10/25 13:46:28 [emerg] 1#1: host not found in upstream "php:9001" in /etc/nginx/conf.d/upstream.conf:1
+2019/10/25 13:47:05 [emerg] 1#1: host not found in upstream "php:9001" in /etc/nginx/conf.d/upstream.conf:1
+2019/10/25 13:48:11 [emerg] 1#1: host not found in upstream "php:9001" in /etc/nginx/conf.d/upstream.conf:1
+2019/10/25 13:50:32 [emerg] 1#1: host not found in upstream "php:9001" in /etc/nginx/conf.d/upstream.conf:1
+2019/10/25 13:52:16 [emerg] 1#1: host not found in upstream "php:9001" in /etc/nginx/conf.d/upstream.conf:1
+2019/10/25 13:56:21 [emerg] 1#1: host not found in upstream "php:9001" in /etc/nginx/conf.d/upstream.conf:1
+2019/10/25 13:57:20 [emerg] 1#1: host not found in upstream "php:9001" in /etc/nginx/conf.d/upstream.conf:1
+2019/10/25 13:59:41 [emerg] 1#1: host not found in upstream "php:9001" in /etc/nginx/conf.d/upstream.conf:1
+2019/10/30 05:04:54 [emerg] 1#1: host not found in upstream "php:9001" in /etc/nginx/conf.d/upstream.conf:1
+2019/10/30 05:06:09 [emerg] 1#1: host not found in upstream "php:9001" in /etc/nginx/conf.d/upstream.conf:1
+2019/10/30 05:11:03 [emerg] 1#1: host not found in upstream "php:9001" in /etc/nginx/conf.d/upstream.conf:1
+2019/10/30 05:40:13 [emerg] 1#1: host not found in upstream "php:9001" in /etc/nginx/conf.d/upstream.conf:1
+2019/10/30 09:19:31 [emerg] 1#1: host not found in upstream "reactivesmb:3005" in /etc/nginx/conf.d/app.conf:2
+2019/10/30 09:26:16 [notice] 39#39: signal process started
+2019/10/30 11:01:37 [emerg] 1#1: invalid number of arguments in "include" directive in /etc/nginx/conf.d/app.conf:31
+2019/10/30 11:02:58 [emerg] 1#1: host not found in upstream "backendsrv" in /etc/nginx/conf.d/app.conf:10

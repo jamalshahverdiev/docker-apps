@@ -1,0 +1,4 @@
+REACT_APP_API_URL=https://smbcore.loc/v1
+REACT_APP_DEV_API_URL=https://smbcore.loc/v1
+REACT_APP_SOCKET_URL=https://notify.smbapp.loc
+REACT_APP_DOMAIN=.smbapp.loc

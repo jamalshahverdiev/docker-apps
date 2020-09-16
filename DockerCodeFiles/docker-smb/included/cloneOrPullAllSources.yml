@@ -1,0 +1,20 @@
+---
+- name: Clone all repositories
+  git:
+   repo: "https://{{ gitUser | urlencode }}:{{ gitPass }}@{{gitUrl}}/ProSBS/{{ item.reponame }}.git"
+   dest: "{{ item.repofolder }}"
+   update: yes
+   version: master
+   force: yes
+  with_items: 
+    - { reponame: 'email-sender-worker', repofolder: 'emailsenderworker/email-sender-worker' }
+    - { reponame: 'Reactor', repofolder: 'symfony' }
+    - { reponame: 'Reactor', repofolder: 'apidoc/Reactor' }
+    - { reponame: 'Reactor', repofolder: 'hrmdoc/Reactor' }
+    - { reponame: 'reactive-smb', repofolder: 'reactivesmb/reactive-smb' }
+    - { reponame: 'sbs-ws-server', repofolder: 'sbswssrv/sbs-ws-server' }
+  tags:
+    - cloneAllRepos
+  register: cloneAllRepos
+
+...

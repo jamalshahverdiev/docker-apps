@@ -1,0 +1,44 @@
+---
+- name: Create Backend App Directory
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: yes
+  with_items:
+    - 'symfony/var/log'
+  tags:
+    - createSymfonyFolder
+  register: createSymfonyFolder
+
+- name: Copy application.properties file to the Email Sender folder
+  copy:
+    src: "{{ item.srcfile }}"
+    dest: "{{ item.dstfile }}"
+    directory_mode: no
+  with_items:
+    - { srcfile: 'php-fpm/configuration.env', dstfile: 'symfony/.env' }
+    - { srcfile: 'emailsenderworker/application.properties', dstfile: 'emailsenderworker/email-sender-worker/src/main/resources/application.properties' }
+  tags:
+    - copyNeededFiles
+  register: copyNeededFiles
+  when: createSymfonyFolder is success
+
+- name: Maven Clean Package Email-Sender
+  shell: mvn clean package
+  args:
+    chdir: "emailsenderworker/email-sender-worker"
+  register: mavenCleanPackageEmailSender
+  tags:
+    - mavenCleanPackageEmailSender
+  when: copyNeededFiles is success
+
+- name: Run docker-compose command
+  shell: docker-compose up -d
+  args:
+    chdir: "./"
+  register: runDockerCompose
+  tags:
+    - runDockerCompose
+  when: mavenCleanPackageEmailSender is success
+
+...

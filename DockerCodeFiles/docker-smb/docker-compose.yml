@@ -1,0 +1,148 @@
+version: '2.1'
+services:
+    db:
+        container_name: pgsql
+        labels:
+          NAME: "pgsql"
+        ports:
+          - '5432:5432'
+        healthcheck:
+          test: ["CMD-SHELL", "pg_isready -U postgres"]
+          interval: 10s
+          timeout: 5s
+          retries: 10
+        environment:
+          - "DB_USER=smbuser"
+          - "DB_PASSWORD=smbpass"
+          - "DB_DATABASE=smbdb"
+          - "POSTGRES_PASSWORD=freebsd"
+        build: './pgsql'
+    php:
+        container_name: php72-fpm
+        labels:
+          NAME: "php72-fpm"
+        build: ./php-fpm
+        ports:
+            - "9000:9001"
+        healthcheck:
+           test: ["CMD", "nc", "-z", "localhost", "9001"]
+           interval: 10s
+           timeout: 5s
+           retries: 10
+        volumes:
+            - ./symfony:/var/www/symfony:cached
+            - ./logs/symfony:/var/www/symfony/var/log:cached
+#        env_file: ./php-fpm/configuration.env
+#        command: >
+#          /bin/sh -c "
+#            echo Migrate Database to the PostgreSQL...;
+#            cd /var/www/symfony;
+#            composer install;
+#            php bin/console doctrine:migrations:migrate --no-interaction;
+#          "
+        depends_on:
+            db:
+              condition: service_healthy
+        links:
+            - db
+    nginx:
+        container_name: nginx
+        labels:
+          NAME: "nginx"
+        build: ./nginx
+        ports:
+            - "80:80"
+            - "443:443"
+        depends_on:
+            - php
+            - reactivesmb
+            - apidoc
+            - hrmdoc
+        links:
+            - php
+            - apidoc
+            - hrmdoc
+        volumes:
+            - ./logs/nginx:/var/log/nginx:cached
+            - ./symfony:/var/www/symfony:cached
+    apidoc:
+        container_name: apidoc
+        labels:
+          NAME: "apidoc"
+        build: ./apidoc
+        ports: 
+          - "3007:3007"
+    hrmdoc:
+        container_name: hrmdoc
+        labels:
+          NAME: "hrmdoc"
+        build: ./hrmdoc
+        ports:
+          - "3008:3008"
+    reactivesmb:
+        container_name: reactivesmb
+        labels:
+          NAME: "reactivesmb"
+        build: ./reactivesmb
+        ports:
+          - "3005:3005"
+        links: 
+            - php
+        depends_on: 
+            php:
+               condition: service_healthy
+    sbswssrv:
+        container_name: sbswssrv
+        build: ./sbswssrv
+        ports:
+            - "3000:3000"
+        labels:
+          NAME: "sbswssrv"
+    emailsenderworker:
+        container_name: emailsenderworker
+        labels:
+          NAME: "emailsenderworker"
+        build: ./emailsenderworker
+        labels:
+          NAME: "emailsenderworker"
+        depends_on:
+            rabbitmq:
+              condition: service_healthy
+        links: 
+           - rabbitmq
+    rabbitmq:
+        container_name: rabbitmq
+        labels:
+          NAME: "rabbitmq"
+        build: ./rabbitmq
+        hostname: "rabbitmq"
+        environment:
+          RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+          RABBITMQ_DEFAULT_USER: "rabbitmq"
+          RABBITMQ_DEFAULT_PASS: "rabbitmq"
+          RABBITMQ_DEFAULT_VHOST: "/"
+        ports:
+          - '4369:4369'
+          - '5672:5672'
+          - '25672:25672'
+          - '15672:15672'
+        healthcheck:
+          test: ["CMD", "curl", "-f", "http://localhost:15672"]
+          interval: 10s
+          timeout: 5s
+          retries: 10
+        volumes:
+          - "./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins"
+    elk:
+        container_name: elk
+        labels:
+          NAME: "elk"
+        build: ./elk
+        ports:
+            - "81:80"
+        volumes:
+            - ./elk/logstash:/etc/logstash:cached
+            - ./elk/logstash/patterns:/opt/logstash/patterns:cached
+            - ./logs/symfony:/var/www/symfony/var/log:cached
+            - ./logs/nginx:/var/log/nginx:cached
+      
