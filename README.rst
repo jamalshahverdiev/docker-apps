@@ -9,3 +9,4 @@ In this repository I will store all type of Docker apps
 * `Create image to handle something and write to the host file system <https://github.com/jamalshahverdiev/docker-apps/tree/master/docker-input-output>`_ 
 * `Create image to generate StatsD traffic <https://github.com/jamalshahverdiev/docker-apps/tree/master/generate-statsd-traffic>`_ 
 * `Docker code files from real project <https://github.com/jamalshahverdiev/docker-apps/tree/master/DockerCodeFiles>`_ 
+* `Automated Jenkins slaves in Docer-Compose with swarm plugin <https://github.com/jamalshahverdiev/docker-apps/tree/master/jenkins-swarm-docker-image>`_ 
