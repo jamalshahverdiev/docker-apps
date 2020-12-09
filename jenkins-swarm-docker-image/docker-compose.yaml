@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  jswarmslave1:
+    container_name: jswarmslave1
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      NAME: jswarmslave1
+    build: ./jswarmslave
+    restart: always
+    hostname: jswarmslave1
+  jswarmslave2:
+    container_name: jswarmslave2
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      NAME: jswarmslave2
+    build: ./jswarmslave
+    restart: always
+    hostname: jswarmslave2
+    #command: -master "http://10.1.42.120:8080" -username "admin" -password "11d3fcf8525e42044a204d77db2d0769f7" -mode "normal" -name "slave_name" -disableClientsUniqueId -executors 4

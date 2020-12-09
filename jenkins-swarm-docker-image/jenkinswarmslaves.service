@@ -1,0 +1,18 @@
+[Unit]
+Description=Jenkins SWARM Slaves in Docker-Compose
+Requires=docker.service
+After=docker.service
+
+[Service]
+WorkingDirectory=/root/jenkins-swarm-docker-image
+PIDFile=/var/run/jenkins/jenkins.pid
+ExecStartPre=-/bin/mkdir -p /var/run/jenkins /var/log/jenkins
+ExecStart=/bin/bash -c "/root/jenkins-swarm-slave-docker/starter.sh 2>&1 >> /var/log/jenkins/dockerjksswarm-slave.log & echo $! > /var/run/jenkins/jenkins.pid"
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+KillSignal=SIGTERM
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
